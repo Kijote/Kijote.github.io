@@ -1,7 +1,36 @@
 <html>
     <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<style>
+		body{background-color:#000;}
+		#log{color:#fff;}
+		#log>code{display:block;}
+	</style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			
+			var log = document.querySelector('#log');
+
+			['log','warn','error'].forEach(function (verb) {
+				console[verb] = (function (method, verb, log) {
+					return function (text) {
+						method(text);
+						// handle distinguishing between methods any way you'd like
+						var msg = document.createElement('code');
+						msg.classList.add(verb);
+						msg.textContent = verb + ': ' + text;
+						log.appendChild(msg);
+					};
+				})(console[verb].bind(console), verb, log);
+			});
+			
+			console.log('test');
+			
+			});
+	</script>
 
 
 	<script>
@@ -314,6 +343,8 @@ console.log( {
 		window.soundManager = new SoundManager();
 		window.volume = 100;
 
+		console.log('volume:' + window.volume);
+		
 		// Setup SoundManager
 		soundManager.setup({
 					debugMode: true,
@@ -325,6 +356,7 @@ console.log( {
 					useHTML5Audio: true,
 					waitForWindowLoad: false,
 					onready: function() {
+						console.log('soundManager: onready');
 						soundManager.createSound({
 						id: "webradio",
 						url: [{
@@ -337,19 +369,26 @@ console.log( {
 					multiShot: false,
 					volume: volume,
 					onconnect: function( bConnect ) {
+						console.log('soundManager: onconnect');
 						setButtonStop();
 					},
 					onfailure: function() {
+						console.log('soundManager: onfailure');
 						setButtonError();
 					},
 					onload: function( bSuccess ) {
+						console.log('soundManager: onload');
 						if ( bSuccess == true ) {
+							console.log('soundManager: onload - success!');
 							setButtonStop();
 						} else {
+							console.log('soundManager: onload - nope!');
 							if ( window.onloadRetry != 2 ) {
+								console.log('soundManager: rebooting');
 								window.onloadRetry++;
 								soundManager.reboot();
 							} else {
+								console.log('soundManager: onload - FAIL!');
 								setButtonError();
 							}
 						}
@@ -401,6 +440,7 @@ console.log( {
 	</script>
     </head>
     <body>
+		<div id="log"></div>
     </body>
 </html>
 
@@ -408,7 +448,7 @@ console.log( {
 
 
 
-
+<!-- 
 var page = require('webpage').create();
 page.open('page.es', function (status) { 
 	if (status !== 'success') { 
@@ -423,3 +463,5 @@ page.open('page.es', function (status) {
 			}, 400); 
 	} 
 });
+
+-->
