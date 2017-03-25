@@ -34,6 +34,7 @@
 
 
 	<script>
+/*
 function getCookieValue(t, i) {
     return i = document.cookie.match("(^|;)\\s*" + t + "\\s*=\\s*([^;]+)"), i ? i.pop() : ""
 }
@@ -334,7 +335,7 @@ console.log( {
     }, "rangeslider.js is available in jQuery context e.g $(selector).rangeslider(options);"
 });
 //# sourceMappingURL=jquery.desktop-functions-3.0.min.js.map
-
+*/
 	</script>
 
 	<script>
@@ -358,7 +359,7 @@ console.log( {
 					onready: function() {
 						console.log('soundManager: onready');
 						soundManager.createSound({
-/*
+
 						// 100.9
 						id: "webradio",
 						url: [{
@@ -366,7 +367,7 @@ console.log( {
 //							url: "http://70.38.29.199:8064/stream"
 							url: "http://audio.bustream.com:8064/stream"
 						}],
-*/
+/*
 						// vorterix
 						id: "webradio",
 						serverURL: "rtmp://r20057.smi.vmf.edge-apps.net/magma-apps/",
@@ -374,46 +375,46 @@ console.log( {
 							type: "audio/mp4",
 							url: "vorterix_radio1_high"
 						}],
+*/					
 						
-						
-					autoLoad: true,
-					autoPlay: true,
-					multiShot: false,
-					volume: volume,
-					onconnect: function( bConnect ) {
-						console.log('soundManager: onconnect');
-						setButtonStop();
-					},
-					onfailure: function() {
-						console.log('soundManager: onfailure');
-						setButtonError();
-					},
-					onload: function( bSuccess ) {
-						console.log('soundManager: onload');
-						if ( bSuccess == true ) {
-							console.log('soundManager: onload - success!');
-							setButtonStop();
-						} else {
-							console.log('soundManager: onload - nope!');
-							if ( window.onloadRetry != 2 ) {
-								console.log('soundManager: rebooting');
-								window.onloadRetry++;
-								soundManager.reboot();
+						autoLoad: true,
+						autoPlay: true,
+						multiShot: false,
+						volume: volume,
+						onconnect: function( bConnect ) {
+							console.log('soundManager: onconnect');
+							//setButtonStop();
+						},
+						onfailure: function() {
+							console.log('soundManager: onfailure');
+							//setButtonError();
+						},
+						onload: function( bSuccess ) {
+							console.log('soundManager: onload');
+							if ( bSuccess == true ) {
+								console.log('soundManager: onload - success!');
+								//setButtonStop();
 							} else {
-								console.log('soundManager: onload - FAIL!');
-								setButtonError();
+								console.log('soundManager: onload - nope!');
+								if ( window.onloadRetry != 2 ) {
+									console.log('soundManager: rebooting');
+									window.onloadRetry++;
+									soundManager.reboot();
+								} else {
+									console.log('soundManager: onload - FAIL!');
+									//setButtonError();
+								}
 							}
+	
+						},
+						onplay: function() {
+							//setButtonStop();
 						}
-
-					},
-					onplay: function() {
-						setButtonStop();
-					}
-				});
-			},
-			ontimeout: function() {
-				setButtonError();
-			}
+					});
+				},
+				ontimeout: function() {
+					//setButtonError();
+				}
 		});
 		
 		// Set the audio controls
