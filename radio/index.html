@@ -10,6 +10,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script>
 
 	<script>
+		$(document).keypress(function(event) {
+          console.log('Handler for .keypress() called. - ' + event.charCode);
+		});
+		
 		$(document).ready(function(){
 			
 			var log = document.querySelector('#log');
