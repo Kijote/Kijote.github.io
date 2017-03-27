@@ -31,7 +31,7 @@
 				})(console[verb].bind(console), verb, log);
 			});
 			
-			console.log('test');
+			console.log('test: 1');
 			
 			});
 	</script>
@@ -62,7 +62,7 @@
 					onready: function() {
 						console.log('soundManager: onready');
 						soundManager.createSound({
-
+/*
 						// 100.9
 						id: "webradio",
 						url: [{
@@ -70,7 +70,8 @@
 //							url: "http://70.38.29.199:8064/stream"
 							url: "http://audio.bustream.com:8064/stream"
 						}],
-/*
+*/
+
 						// vorterix
 						id: "webradio",
 						serverURL: "rtmp://r20057.smi.vmf.edge-apps.net/magma-apps/",
@@ -78,7 +79,7 @@
 							type: "audio/mp4",
 							url: "vorterix_radio1_high"
 						}],
-*/					
+					
 						
 						autoLoad: true,
 						autoPlay: true,
