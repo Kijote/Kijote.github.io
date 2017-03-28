@@ -11,6 +11,16 @@
 	
 
 	<script>
+		// auto actualización ME CAGO EN SAMSUNG!
+
+		d = new Date();
+		var now = d.getFullYear() + '' + d.getMonth() + '' + d.getDate() + '' + d.getHours() + '' + d.getMinutes();
+		var wl = '' + window.location;
+		var wls = window.location.search;
+		if("" == wls.substr(1).trim() || wls.substr(1).trim() != now){
+			window.location = wl.replace(wls, '') + '?' + now; //(new Date()).getMilliseconds() * Math.random() * 1e14;
+		}
+		
 		$(document).keypress(function(event) {
           console.log('Handler for .keypress() called. - ' + event.charCode);
 		});
