@@ -4,6 +4,7 @@
 		body{background-color:#000;}
 		#log{color:#fff;}
 		#log>code{display:block;}
+		#soundmanager-debug{color:#fff;}
 	</style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -48,9 +49,7 @@
 		soundManager.setup({
 					debugMode: true,
 					useConsole: true,
-					consoleOnly: true,
-					
-					stream: true,
+					consoleOnly: false,
 					
 					flashLoadTimeout: 1000,
 					flashVersion: 9,
@@ -62,7 +61,7 @@
 					onready: function() {
 						console.log('soundManager: onready');
 						soundManager.createSound({
-/*
+
 						// 100.9
 						id: "webradio",
 						url: [{
@@ -70,16 +69,17 @@
 //							url: "http://70.38.29.199:8064/stream"
 							url: "http://audio.bustream.com:8064/stream"
 						}],
-*/
 
+/*
 						// vorterix
 						id: "webradio",
 						serverURL: "rtmp://r20057.smi.vmf.edge-apps.net/magma-apps/",
 						url: [{
+							stream: true,
 							type: "audio/mp4",
 							url: "vorterix_radio1_high"
 						}],
-					
+*/				
 						
 						autoLoad: true,
 						autoPlay: true,
@@ -159,7 +159,8 @@
     </head>
     <body>
 		<div id="log"></div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script>
+		<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
     </body>
 </html>
 
