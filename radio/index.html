@@ -38,6 +38,54 @@
 	</script>
 
 	<script>
+		var soundObject;
+		
+		$(document).ready(function(){
+			window.soundManager = new SoundManager();
+			window.volume = 100;
+			
+			soundManager.setup({
+				debugMode: true,
+				useConsole: true,
+				consoleOnly: false,
+				
+				preferFlash: false,
+				useHighPerformance: true,
+				useHTML5Audio: true,
+				waitForWindowLoad: false,
+				onready: function(){
+					soundObject = soundManager.createSound({
+						id: "webradio",
+								url: [{
+									type: "audio/aac",
+		//							url: "http://70.38.29.199:8064/stream"
+									url: "http://audio.bustream.com:8064/stream"
+								}],
+						autoLoad: true,
+						autoPlay: true,
+						multiShot: false,
+						volume: volume,
+						
+					});  
+					soundObject.load();
+					setTimeout(function() {
+						if (soundObject.readyState == 1) {
+							console.log('this object is probably stalled');
+							// this object is probably stalled
+							}
+					},5500);
+				}
+			});
+		});
+		
+		
+		
+		function createSound() {
+			
+		}
+	</script>
+
+	<!-- script>
 	$(document).ready(function() {
 		window.onloadRetry = 0;
 		window.soundManager = new SoundManager();
@@ -155,7 +203,7 @@
 			$( "#sm-button-container" ).data( "device-category" ) == "desktop" ? addVolumeSider() : ""; 			soundManager.beginDelayedInit(); 		}
 	});
 */
-	</script>
+	</script -->
     </head>
     <body>
 		<div id="log"></div>
