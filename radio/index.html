@@ -74,13 +74,15 @@
 //									url: "http://audio.bustream.com:8064/stream"
 						}],
 						*/
-						url: 'https://rawgit.com/scottschiller/SoundManager2/tree/master/demo/_mp3/bass.mp3',
+						//url: 'https://rawgit.com/scottschiller/SoundManager2/tree/master/demo/_mp3/bass.mp3',
+						url: 'http://www.freshly-ground.com/data/audio/binaural/Mak.mp3',
 						autoLoad: true,
 						autoPlay: true,
 						multiShot: false,
 						volume: volume,
 						
-					});  
+					});
+					soundObject.play();
 					setTimeout(function() {
 						if (soundObject.readyState == 1) {
 							console.log('this object is probably stalled');
