@@ -42,15 +42,13 @@
 				})(console[verb].bind(console), verb, log);
 			});
 			
-			console.log('test: 2');
-			
-			});
+		});
 	</script>
 
 	<script>
 		var soundObject;
 		
-		$(document).ready(function(){
+//		$(document).ready(function(){
 			window.soundManager = new SoundManager();
 			window.volume = 100;
 			
@@ -63,6 +61,7 @@
 				useHighPerformance: true,
 				useHTML5Audio: true,
 				waitForWindowLoad: false,
+				
 				onready: function(){
 					soundObject = soundManager.createSound({
 						id: "webradio",
@@ -87,13 +86,8 @@
 					},5500);
 				}
 			});
-		});
-		
-		
-		
-		function createSound() {
-			
-		}
+//		});
+
 	</script>
 
 	<!-- script>
