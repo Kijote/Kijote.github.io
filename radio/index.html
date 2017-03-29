@@ -66,12 +66,15 @@
 				onready: function(){
 					soundObject = soundManager.createSound({
 						id: "webradio",
-								url: [{
-									type: "audio/aac",
-									url: "http://audio.bustream.com:8064/1009mp3?type=.mp3"
+						/*
+						url: [{
+							type: "audio/aac",
+							url: "http://audio.bustream.com:8064/1009mp3?type=.mp3"
 //									url: "http://70.38.29.199:8064/stream"
 //									url: "http://audio.bustream.com:8064/stream"
-								}],
+						}],
+						*/
+						url: 'https://rawgit.com/scottschiller/SoundManager2/tree/master/demo/_mp3/bass.mp3',
 						autoLoad: true,
 						autoPlay: true,
 						multiShot: false,
@@ -84,6 +87,10 @@
 							// this object is probably stalled
 							}
 					},5500);
+				},
+				
+				ontimeout: function(){
+					console.log('soundObject.readyState: ' + soundObject.readyState);
 				}
 			});
 		});
