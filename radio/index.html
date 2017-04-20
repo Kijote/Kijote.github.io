@@ -48,6 +48,39 @@
 	</script>
 
 	<script>
+	var radios = new Array();
+	var act_radio = 0;
+
+	radios[ 9530] = {type: "audio/aac", url: "http://streamall.alsolnet.com:443/metropolitana"};
+	radios[10090] = {type: "audio/aac", url: "http://audio.bustream.com:8064/stream"};
+
+
+	$(document).ready(function() {
+		radios.forEach(function (item, index, array){
+			$('<button id="' + index + '" value="' + index / 100 + '" onclick="play(' + index + ');">' + index / 100 + '</button>').appendTo('body');
+			console.log(item);
+		});
+	});
+
+	function play(index){
+		act_radio = index;
+		console.log(soundObject);
+		soundObject.destruct();
+
+		var radio = radios[index];
+		radio.onload = function(bSuccess) {
+			console.log($('#' + act_radio));
+			if(!bSuccess) { $('#' + act_radio).css('background-color', 'red'); }
+		    	soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
+		}
+
+		soundObject = soundManager.createSound(radio);
+
+		soundObject.play();
+	}
+	</script>
+
+	<script>
 		var soundObject;
 		
 		$(function(){
@@ -76,13 +109,18 @@
 //									url: "http://audio.bustream.com:8064/stream"
 						}],
 						*/
-						//url: 'https://rawgit.com/scottschiller/SoundManager2/tree/master/demo/_mp3/bass.mp3',
 						url: 'http://www.freshly-ground.com/data/audio/binaural/Mak.mp3',
 						autoLoad: true,
 						autoPlay: true,
 						multiShot: false,
 						volume: volume,
-						
+						onload: function(bSuccess) {
+						    soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
+						},
+
+						onfailure: function() {
+							$('#' + act_radio).css('background-color', 'red');
+						},
 					});
 					soundObject.play();
 					setTimeout(function() {
@@ -92,7 +130,7 @@
 							}
 					},5500);
 				},
-				
+
 				ontimeout: function(){
 					console.log('soundObject.readyState: ' + soundObject.readyState);
 				}
