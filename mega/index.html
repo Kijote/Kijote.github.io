@@ -1,0 +1,20 @@
+<html>
+<head>
+	<script>
+		function solve(){
+			var el = document.getElementById('megaurl');
+			location.assign(el.value.replace('https://mega.nz/#', 'https://mega.nz/embed#'));
+		}
+
+		function clean(){
+			var el = document.getElementById('megaurl');
+			el.value = '';
+		}
+	</script>
+</head>
+<body style="text-align: center;">
+<input style="width:100%;font-size:1em;padding:.5em;" type="text" id="megaurl" value="https://mega.nz/#!s5RnRC5I!JAW8dpfL0Fj3ngrP-TnDDmyTXFGFA8IDcwIf66KceSE" />
+<button onclick="clean();" style="background: #bb6666; border: 2px solid #bb0000; color: #fff;margin-top:1em; font-size:1em;padding:1em;line-height: 1em;">&#x1F5D1;&nbsp;Clear</button>
+<button onclick="solve();" style="background: #66bb66; border: 2px solid #00bb00; color: #fff;margin-top:1em; font-size:1em;padding:1em;line-height: 1em;margin-left: 4em;">&#x25b6;&nbsp;Play</button>
+</body>
+</html>
