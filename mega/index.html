@@ -1,9 +1,10 @@
 <html>
 <head>
-	<script>
-		function solve(){
-			var el = document.getElementById('megaurl');
-			location.assign(el.value.replace('https://mega.nz/#', 'https://mega.nz/embed#'));
+	<script type="text/javascript">
+		function solve(data){
+			console.log(data);
+			var el = data || document.getElementById('megaurl').value;
+			location.assign(el.replace('https://mega.nz/#', 'https://mega.nz/embed#'));
 		}
 
 		function clean(){
@@ -11,10 +12,56 @@
 			el.value = '';
 		}
 	</script>
+	<style type="text/css">
+		button {
+			border: 2px solid #c0c0c0; 
+			color: #fff;
+			font-size:1em;
+			padding:1em;
+			line-height: 1em;
+			background: #808080;
+			width: 100%;
+			margin-bottom: -2px;
+		}
+
+		button:hover{
+			   -moz-box-shadow:    inset 0 0 10px #202020;
+			   -webkit-box-shadow: inset 0 0 10px #202020;
+			   box-shadow:         inset 0 0 10px #202020;
+		}
+
+		button:not(.clear):before {
+			content: "▶ ";
+		}
+
+		button.clear {
+			width: auto;
+			background: #bb6666;
+			border-color: #bb0000;
+			margin-top:1em;
+			margin-bottom:1em; 
+		}
+
+		button.clear:before {
+			content: "🗑 ";
+		}
+
+		button.play {
+			width: auto; 
+			background: #66bb66; 
+			border-color: #00bb00; 
+			margin-left: 4em;
+			margin-top:1em; 
+			margin-bottom:1em; 
+		}
+	</style>
 </head>
 <body style="text-align: center;">
 <input style="width:100%;font-size:1em;padding:.5em;" type="text" id="megaurl" value="https://mega.nz/#!s5RnRC5I!JAW8dpfL0Fj3ngrP-TnDDmyTXFGFA8IDcwIf66KceSE" />
-<button onclick="clean();" style="background: #bb6666; border: 2px solid #bb0000; color: #fff;margin-top:1em; font-size:1em;padding:1em;line-height: 1em;">&#x1F5D1;&nbsp;Clear</button>
-<button onclick="solve();" style="background: #66bb66; border: 2px solid #00bb00; color: #fff;margin-top:1em; font-size:1em;padding:1em;line-height: 1em;margin-left: 4em;">&#x25b6;&nbsp;Play</button>
+<button onclick="clean();" class="clear">Clear</button>
+<button onclick="solve();" class="play">Play</button>
+<br>
+<button onclick="solve(this.value)" value="https://mega.nz/#!R55AzDKB!BXJpa8r5hnpZle8Nj9seaFLTIdJTbpAma2Z-wsgus4A">Rio (2011)</button>
+<button onclick="solve(this.value)" value="https://mega.nz/#!Z04WBKaK!CLw6wnu7xNeYSZ-jlMWob6AuS9fKLn1V_LLh-ZnS0hE">Rio 2 (2014)</button>
 </body>
 </html>
