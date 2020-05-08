@@ -68,7 +68,7 @@
 			console.log(array);
 			var itemName = index / 100;
 			if ( array[index].hasOwnProperty('radio_name') ) {
-				itemName = array[index].radio_name . "<br />" . index / 100;
+				itemName = array[index].radio_name + "<br />" + index / 100;
 			}
 			$('<button id="' + index + '" value="' + index / 100 + '" onclick="play(' + index + ');">' + itemName + '</button>').appendTo('body');
 			console.log(item);
