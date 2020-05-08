@@ -10,8 +10,9 @@
 		#log{color:#fff; display:none;}
 		#log>code{display:block;}
 		#soundmanager-debug{color:#fff;}
-		button{font-size: 3vh; min-width: 50vw;}
+		button{font-size: 3vh; min-width: 100%; background-color: #2A2A2E; border:5px solid #5A5A5E;}
 		button::first-line {font-size: 7vh !important;}
+		div#list{width:50vw; float:right; overflow: auto; height: 100vh;}
 	</style>
 
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -284,6 +285,7 @@
     </head>
     <body>
 		<div id="log"></div>
+	    	<div id="list"></div>
 		<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
     </body>
