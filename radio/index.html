@@ -175,6 +175,13 @@ input:checked + .slider:before {
 		openFullScreen();
 		
 		$('body').click();
+		
+		if((window.fullScreen) ||
+		   (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+			$($('#fullscreen').children('input')[0]).prop("checked", true);
+		} else {
+
+		}
 	});
 		
 	
