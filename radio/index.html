@@ -157,10 +157,12 @@ input:checked + .slider:before {
 	var closedFullScreen = false;
 		
 	$('#fullscreen').click(function(){
-		if($(this).prop("checked") == true){
+		var check = $('#fullscreen').children('input')[0];
+		if($(check).prop("checked") == true){
 			openFullScreen();
-		} else if($(this).prop("checked") == false){
+		} else if($(check).prop("checked") == false){
 			closeFullScreen();
+			closedFullScreen = true;
 		}
 
 	});
@@ -196,8 +198,6 @@ input:checked + .slider:before {
 	  	} else if (document.msExitFullscreen) { /* IE/Edge */
 	    		document.msExitFullscreen();
 	  	}
-		
-		closedFullScreen = true;
 	}
 
 	function play(index){
