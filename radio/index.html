@@ -139,6 +139,7 @@ input:checked + .slider:before {
 	radios[10095] = {type: "audio/aac", radio_name: "Del sol - Rock", url: "http://audio.bustream.com:8053/stream"};
 	
 	
+	var closedFullScreen = false;
 
 	$(document).ready(function() {
 		radios.forEach(function (item, index, array){
@@ -151,28 +152,32 @@ input:checked + .slider:before {
 			console.log(item);
 		});
 
-		openFullScreen();
-	});
-	
-	var closedFullScreen = false;
 		
-	$('#fullscreen').click(function(){
-		var check = $('#fullscreen').children('input')[0];
-		console.log($(check));
-		if($(check).prop("checked")){
-			openFullScreen();
-		} else {
-			closeFullScreen();
-			closedFullScreen = true;
-		}
+		
+		$('#fullscreen').click(function(){
+			var check = $('#fullscreen').children('input')[0];
+			console.log($(check));
+			if($(check).prop("checked")){
+				openFullScreen();
+			} else {
+				closeFullScreen();
+				closedFullScreen = true;
+			}
 
+		});
+		
+		$('body').click(function(evt){
+			if(!closedFullScreen){
+				openFullScreen();
+			}
+		});
+		
+		openFullScreen();
+		
+		$('body').click();
 	});
 		
-	$('body').click(function(evt){
-		if(!closedFullScreen){
-			openFullScreen();
-		}
-	});
+	
 		
 	/* View in fullscreen */
 	function openFullScreen() {
