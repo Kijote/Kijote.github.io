@@ -15,6 +15,7 @@
 		div#list{width:50vw; float:right; overflow: none; height: 100vh; overflow-y: scroll;}
 		div#list>button:first-of-type {border-top: 5px solid #5A5A5E;}
 		div#list>button{min-width: 100%; border-top: 0px;}
+		div#panel{width:50vw; float:left; overflow: none; height: 100vh}
 	</style>
 
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -31,7 +32,7 @@
 		}
 		
 		$(document).keypress(function(event) {
-          console.log('Handler for .keypress() called. - ' + event.charCode);
+          		console.log('Handler for .keypress() called. - ' + event.charCode);
 		});
 		
 		$(function(){
@@ -86,7 +87,45 @@
 			$('<button id="' + index + '" value="' + index / 100 + '" onclick="play(' + index + ');">' + itemName + '</button>').appendTo('div#list');
 			console.log(item);
 		});
+
+		openFullScreen();
+		
+		$('#fullscreen').click(function(){
+            		if($(this).prop("checked") == true){
+				openFullScreen();
+            		} else if($(this).prop("checked") == false){
+				closeFullScreen();
+            		}
+
+       		});
 	});
+	
+	/* View in fullscreen */
+	function openFullscreen() {
+		var elem = document.documentElement;
+		if (elem.requestFullscreen) {
+		    elem.requestFullscreen();
+		} else if (elem.mozRequestFullScreen) { /* Firefox */
+		    elem.mozRequestFullScreen();
+		} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+		    elem.webkitRequestFullscreen();
+		} else if (elem.msRequestFullscreen) { /* IE/Edge */
+		    elem.msRequestFullscreen();
+		}
+	}
+		
+	/* Close fullscreen */
+	function closeFullscreen() {
+	  	if (document.exitFullscreen) {
+	    		document.exitFullscreen();
+	  	} else if (document.mozCancelFullScreen) { /* Firefox */
+	    		document.mozCancelFullScreen();
+	  	} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+	    		document.webkitExitFullscreen();
+	  	} else if (document.msExitFullscreen) { /* IE/Edge */
+	    		document.msExitFullscreen();
+	  	}
+	}
 
 	function play(index){
 		act_radio = index;
@@ -286,10 +325,11 @@
 	</script -->
     </head>
     <body>
-		<div id="log"></div>
-	    	<div id="list"></div>
-		<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
+	    <div id="log"></div>
+	    <div id="panel"><label><input type="checkbox" id="fullscreen"> Pantalla completa</label><br></div>
+	    <div id="list"></div>
+	    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
     </body>
 </html>
 
