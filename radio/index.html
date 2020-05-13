@@ -158,9 +158,9 @@ input:checked + .slider:before {
 		
 	$('#fullscreen').click(function(){
 		var check = $('#fullscreen').children('input')[0];
-		if($(check).prop("checked") == true){
+		if($(check).prop("checked")){
 			openFullScreen();
-		} else if($(check).prop("checked") == false){
+		} else {
 			closeFullScreen();
 			closedFullScreen = true;
 		}
