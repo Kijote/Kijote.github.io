@@ -6,7 +6,8 @@
    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<style>
 		* {font-size: 1vh; color: #fff; padding:0px; margin: 0px;}
-		body{background-color:#000;}
+		body{background-color:#000}
+		#content{background-color:#000; position: absolute; top:0; left:0; right:0; bottom:0;}
 		#log{color:#fff; display:none;}
 		#log>code{display:block;}
 		#soundmanager-debug{color:#fff;}
@@ -414,8 +415,10 @@ input:checked + .slider:before {
     </head>
     <body>
 	    <div id="log"></div>
-	    <div id="panel"><label class="switch" id="fullscreen"><input type="checkbox"><span class="slider round"></span> Pantalla completa</label><br></div>
-	    <div id="list"></div>
+	    <div id="content">
+		    <div id="panel"><label class="switch" id="fullscreen"><input type="checkbox"><span class="slider round"></span> Pantalla completa</label><br></div>
+		    <div id="list"></div>
+	    </div>
 	    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
     </body>
