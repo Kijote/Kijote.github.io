@@ -188,7 +188,8 @@ input:checked + .slider:before {
 			show();
 		});
 		
-		$('body').mousemove(function(evt) {
+		$(document).mousemove(function(evt) {
+			console.log('mooove!');
 			show();
 		});
 		
@@ -205,10 +206,12 @@ input:checked + .slider:before {
 	});
 		
 	function hide(){
+		console.log('hide!');
 		$('#content').hide();
 	}
 		
 	function show(){
+		console.log('show!');
 		$('#content').show();
 		var check = $('#autohide').children('input')[0];
 		if($(check).prop("checked")){
