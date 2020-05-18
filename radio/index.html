@@ -5,7 +5,7 @@
 	<meta charset="utf-8"/>
    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<style>
-		* {font-size: 3vh; font-family: sans-serif; color: #fff; padding:0px; margin: 0px;}
+		* {font-size: 3vh; font-family: sans-serif; color: #fff; padding:0px; margin: 0px; transition: all 0.5s ease;}
 		body{background-color:#000}
 		#content{background-color:#000; position: absolute; top:0; left:0; right:0; bottom:0;}
 		#log{color:#fff; display:none;}
@@ -175,10 +175,20 @@ input:checked + .slider:before {
 
 		});
 		
+		$('#autohide').click(function(){
+			show();
+		});
+		
+		show();
+		
 		$('body').click(function(evt){
 			if(!closedFullScreen){
 				openFullScreen();
 			}
+		});
+		
+		$( "div" ).mousemove(function(evt) {
+			show();
 		});
 		
 		openFullScreen();
@@ -193,7 +203,17 @@ input:checked + .slider:before {
 		}
 	});
 		
-	
+	function hide(){
+		$('#content').hide();
+	}
+		
+	function show(){
+		$('#content').show();
+		var check = $('#autohide').children('input')[0];
+		if($(check).prop("checked")){
+			setTimeout(hide, 5000);
+		}
+	}
 		
 	/* View in fullscreen */
 	function openFullScreen() {
@@ -424,7 +444,10 @@ input:checked + .slider:before {
     <body>
 	    <div id="log"></div>
 	    <div id="content">
-		    <div id="panel"><label class="switch" id="fullscreen"><input type="checkbox"><span class="slider round"></span><span class="label">Pantalla completa</span></label><br></div>
+		    <div id="panel">
+			    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
+			    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
+		    </div>
 		    <div id="list"></div>
 	    </div>
 	    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
