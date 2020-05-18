@@ -185,9 +185,10 @@ input:checked + .slider:before {
 			if(!closedFullScreen){
 				openFullScreen();
 			}
+			show();
 		});
 		
-		$( "div" ).mousemove(function(evt) {
+		$('body').mousemove(function(evt) {
 			show();
 		});
 		
