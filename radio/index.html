@@ -7,7 +7,7 @@
 	<style>
 		* {font-size: 3vh; font-family: sans-serif; color: #fff; padding:0px; margin: 0px; transition: all 0.5s ease;}
 		body{background-color:#000}
-		#content{background-color:#000; position: absolute; top:0; left:0; right:0; bottom:0;}
+		#background, #content{background-color:#000; position: absolute; top:0; left:0; right:0; bottom:0;}
 		#log{color:#fff; display:none;}
 		#log>code{display:block;}
 		#soundmanager-debug{color:#fff;}
@@ -149,6 +149,7 @@ input:checked + .slider:before {
 	
 	
 	var closedFullScreen = false;
+	var hideTimeout = null;
 
 	$(document).ready(function() {
 		radios.forEach(function (item, index, array){
@@ -211,11 +212,12 @@ input:checked + .slider:before {
 	}
 		
 	function show(){
+		clearTimeout(hideTimeout);
 		console.log('show!');
 		$('#content').show();
 		var check = $('#autohide').children('input')[0];
 		if($(check).prop("checked")){
-			setTimeout(hide, 5000);
+			hideTimeout = setTimeout(hide, 5000);
 		}
 	}
 		
@@ -447,12 +449,14 @@ input:checked + .slider:before {
     </head>
     <body>
 	    <div id="log"></div>
-	    <div id="content">
-		    <div id="panel">
-			    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
-			    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
+	    <div id="background">
+		    <div id="content">
+			    <div id="panel">
+				    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
+				    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
+			    </div>
+			    <div id="list"></div>
 		    </div>
-		    <div id="list"></div>
 	    </div>
 	    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
