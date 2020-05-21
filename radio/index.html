@@ -281,16 +281,16 @@ input:checked + .slider:before {
 		}
 		
 		$("#playing").html(itemName);
-		$("#status").removeClass(['error','playing']).addClass('loading').text(__('loading'));
+		$("#status").removeClass().addClass('loading').text(__('loading'));
 		
 		var radio = radios[index];
 		radio.onload = function(bSuccess) {
 			console.log($('#' + act_radio));
 			if(!bSuccess) { 
 				//$('#' + act_radio).css('background-color', 'red'); 
-				$("#status").removeClass(['loading','playing']).addClass('error').text(__("error"));
+				$("#status").removeClass().addClass('error').text(__("error"));
 			} else {
-				$("#status").removeClass(['loading','error']).addClass('playing').text(__("playing"));
+				$("#status").removeClass().addClass('playing').text(__("playing"));
 			}
 		    	soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
 		}
