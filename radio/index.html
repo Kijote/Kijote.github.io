@@ -271,7 +271,7 @@ input:checked + .slider:before {
 			itemName = radios[index].radio_name + "<br />" + index / 100;
 		}
 		
-		$("#playing").text = itemName;
+		$("#playing").text(itemName);
 		
 		var radio = radios[index];
 		radio.onload = function(bSuccess) {
