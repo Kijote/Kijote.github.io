@@ -17,6 +17,7 @@
 		button::first-line {font-size: 6vh !important;}
 		#playing{font-size: 6vh; color: #5A5A5E; text-align: center; margin-top: 15vh;}
 		#playing::first-line {font-size: 9vh !important; white-space: nowrap; color: #fff;}
+		#status{font-size: 4vh; text-transform: uppercase; letter-spacing: 1vw; white-space: nowrap; color: #5A5A5E;}
 		div#list{width:40vw; /*float:right;*/ position: fixed; top:0; right:0; bottom:0; overflow: none; height: 100vh; overflow-y: scroll;}
 		div#list>button:first-of-type {border-top: 5px solid #5A5A5E;}
 		div#list>button{min-width: 100%; border-top: 0px;}
@@ -37,6 +38,7 @@
   display: inline-block;
   left: 66px;
   line-height: 34px;
+  white-space: nowrap;
 }
 		
 /* Hide default HTML checkbox */
@@ -261,6 +263,10 @@ input:checked + .slider:before {
 	  	}
 	}
 
+	function __(original_string){
+		return original_string;
+	}
+		
 	function play(index){
 		act_radio = index;
 		console.log(soundObject);
@@ -272,11 +278,17 @@ input:checked + .slider:before {
 		}
 		
 		$("#playing").html(itemName);
+		$("#status").removeClass(['error','playing']).addClass('loading').text(__('loading'));
 		
 		var radio = radios[index];
 		radio.onload = function(bSuccess) {
 			console.log($('#' + act_radio));
-			if(!bSuccess) { $('#' + act_radio).css('background-color', 'red'); }
+			if(!bSuccess) { 
+				//$('#' + act_radio).css('background-color', 'red'); 
+				$("#status").removeClass(['loading','playing']).addClass('error').text(__("error"));
+			} else {
+				$("#status").removeClass(['loading','error']).addClass('playing').text(__("playing"));
+			}
 		    	soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
 		}
 
@@ -476,6 +488,7 @@ input:checked + .slider:before {
 		    <div id="content">
 			    <div id="panel">
 				    <div id="playing"></div>
+				    <div id="status"></div>
 				    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
 				    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
 			    </div>
