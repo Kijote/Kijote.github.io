@@ -15,6 +15,8 @@
 		#soundmanager-debug{color:#fff;}
 		button{font-size: 3vh; background-color: #2A2A2E; border: 5px solid #5A5A5E;}
 		button::first-line {font-size: 6vh !important;}
+		#playing{font-size: 6vh; color: #fff; text-align: center;}
+		#playing::first-line {font-size: 10vh !important;}
 		div#list{width:40vw; /*float:right;*/ position: fixed; top:0; right:0; bottom:0; overflow: none; height: 100vh; overflow-y: scroll;}
 		div#list>button:first-of-type {border-top: 5px solid #5A5A5E;}
 		div#list>button{min-width: 100%; border-top: 0px;}
@@ -264,6 +266,13 @@ input:checked + .slider:before {
 		console.log(soundObject);
 		soundObject.destruct();
 
+		var itemName = index / 100;
+		if ( radios[index].hasOwnProperty('radio_name') ) {
+			itemName = radios[index].radio_name + "<br />" + index / 100;
+		}
+		
+		$("#playing").text = itemName;
+		
 		var radio = radios[index];
 		radio.onload = function(bSuccess) {
 			console.log($('#' + act_radio));
@@ -466,6 +475,7 @@ input:checked + .slider:before {
 	    <div id="background">
 		    <div id="content">
 			    <div id="panel">
+				    <div id="playing"></div>
 				    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
 				    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
 			    </div>
