@@ -1,1 +1,401 @@
-Nada para decir... todavía.
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Andrés Morales</title>
+
+<!-- link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" -->
+
+	<script type="text/javascript" src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.min.js"></script>
+
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Exo:100,200,400,700&display=swap');
+
+		* {
+		   font-family: 'Exo', sans-serif;
+		   font-size: 1em;
+		   font-weight: 200;
+		}
+
+		* {margin:0; padding:0;}
+
+		section {
+			padding-left: 5%;
+			padding-right: 5%;
+			margin-top: 32px;
+		}
+
+		header {
+			text-align: center; 
+			padding: 25px 0 25px 0;
+			background-color: #202020;
+			color: #fff;
+		}
+
+		header ul.contact{
+			list-style-type: none;
+			text-align: center;
+			position: relative;
+			display: block;
+			margin-top:32px;
+			margin-bottom:32px;
+		}
+
+		header ul.contact>li{
+			display: inline-block;
+		}
+
+		header ul.contact>li:not(:first-child):before {
+			content: " | ";
+		}
+
+		.contact a {
+			text-decoration: none;
+			text-decoration-line: dotted;
+			color: #fff;
+		}
+
+		h1{font-size: 40px;}
+
+		section.centered {
+			text-align: center;
+		}
+
+		section.with-title:before {
+			width: 100%;
+			display: block;
+			font-weight: 400;
+			font-size: 20px;
+			text-align: center;
+		}
+
+		div.with-title:before {
+			display: block;
+			font-weight: 400;
+			font-size: 15px;
+			margin: 10px 0 10px -32px;
+		}
+
+		footer {
+			background-color: #404040;
+			padding: 32px 15% 32px 15%;
+			margin-top: 32px;
+			color: #fff;
+		}
+
+		footer .name {
+			font-size: 25px;
+			font-weight: 400;
+		}
+
+		footer .email, footer .phone {
+			font-weight: 400;
+		}
+
+		footer.with-title:before {
+			display: block;
+			font-weight: 400;
+			font-size: 15px;
+			margin: 10px 0 10px 0px;
+		}
+
+		div.with-title {
+			padding-left: 32px;
+		}
+
+		footer.contact:before {
+			content: "Datos de contacto";
+		}
+
+		.projects:before {
+			content: "Proyectos destacados";
+			font-style: italic;
+		}
+
+		.main-tech:before {
+			content: "Principales tecnologías";
+		}
+
+		.main-phpf:before {
+			content: "Principales frameworks";
+		}
+
+		.main-skills:before {
+			content: "Principales aptitudes";
+		}
+		
+		.experience:before {
+			content: "Experiencia";
+		}
+
+		.courses:before {
+			content: "Estudios / Cursos / Talleres";
+		}
+
+		.courses ul {
+			margin-top: 32px;
+		}
+
+		.courses {
+			padding: 32px 20% 32px 20%;
+			background-color: #f0f0f0;
+		}
+
+		.experience {
+			max-width: 70%;
+			margin-left: 15%;
+			margin-right: 15%;
+		}
+
+		.experience>ul {
+			list-style-type: none;
+			list-style-position: outside;
+		}
+
+
+
+		.experience>ul>li>div{
+			position: relative;
+			margin-left: 20px;
+			padding-bottom: 32px;
+		}
+
+		.experience>ul>li>div>em{
+			font-weight: 400;
+		}
+
+		.experience>ul>li>div b,
+		.experience>ul>li>div span {
+			display: block;
+			clear: both;
+			margin-top: 20px;
+		}
+
+		strong,b {
+			font-weight: 700;
+		}
+
+		.experience>ul>li {
+			border-left: 2px solid #404040;
+		}
+
+		.experience>ul>li:before{
+		  color: #404040; 
+		  background-color: #fff;
+		  content: "⬤";
+		  position: relative;
+		  margin-left: -11px;
+		  border-radius: 50%;
+		  top:20px;
+		  padding: 0px 2px 3px 2px;
+		}
+/*		
+		.experience ul li:not(:last-child)::marker  {
+		    border-left: 1px solid #000;
+		    content: "";
+		    position: relative;
+		    left: -12px;
+		    top: 20px;
+		    height: 200px;
+		    display: inline-block;
+		}
+*/
+		ul.tagged-list, footer ul {
+  			list-style-type: none;
+  			display: inline-block;
+		}
+
+		ul.tagged-list li {
+			float:left;
+			margin: 10px;
+			padding: 3px 7px 3px 7px;
+			background-color: #404040;
+			color: #fff;
+			border: 1px solid #000;
+			border-radius: 5px;
+		}
+
+		div.img {
+			display: inline-block; 
+			width: 200px; 
+			height: 200px; 
+			border-radius: 50%; 
+			text-align: center; 
+			overflow: hidden; 
+			background-color: #ddd;
+		}
+		
+		img {max-height: 220px; margin-top: 0px; margin-left: 0px;}
+
+
+		section.print {
+			height:60px;
+		}
+	</style>
+
+
+
+
+</head>
+<body>
+	<header>
+		<div class="img">
+			<img src="cv3.png">
+		</div>
+		<h1>Andrés Morales</h1>
+		<span>Fullstack Developer / SysAdmin</span>
+		<ul class="contact">
+			<li class="email"><a href="mailto:contacto@andresmorales.com.ar">contacto@andresmorales.com.ar</a></li>
+			<li class="phone"><a href="tel:+54 261 5916857">+54 261 5916857</a></li>
+		</ul>
+	</header>
+	<section class="print"></section>
+	<section class="with-title main-tech centered">
+		<ul class="tagged-list">
+			<li>PHP</li>
+			<li>MySQL</li>
+			<li>HTML5</li>
+			<li>CSS3</li>
+			<li>Javascript</li>
+			<li>git</li>
+			<li>nginx</li>
+		</ul>
+	</section>
+	<section class="with-title main-phpf centered">
+		<ul class="tagged-list">
+			<li>Kohana</li>
+			<li>Ko7</li>
+			<li>jQuery</li>
+			<li>Bootstrap</li>
+		</ul>
+	</section>
+	<section class="with-title main-skills centered">
+		<ul class="tagged-list">
+			<li>Responsable</li>
+			<li>Organizado</li>
+			<li>Trabajo en equipo</li>
+			<li>Proactivo</li>
+			<li>Creativo</li>
+			<li>Comunicativo</li>
+			<li>Sociable</li>
+			<li>Adaptable</li>
+			<li>Autodidacta</li>
+		</ul>
+	</section>
+	<section class="print"></section>
+	<section class="with-title courses">
+		<ul>
+			<li>Taller Amazon Web Services (AWS) - Immersion Days</li>
+			<li>Workshop Introducción a Next.js (React Framework)</li>
+			<li>Curso Scrum Master</li>
+			<li>Curso Gestión del tiempo</li>
+			<li>Postítulo en Educación y TICs</li>
+			<li>Profesorado de Matemática</li>
+		</ul>
+	</section>
+	<section class="with-title experience">
+		<ul>
+			<li><div><em>2010 - Actualidad</em>
+					<b>Desarrollador Web / SysAdmin en Municipalidad de la Ciudad de Mendoza</b>
+					<div class="with-title projects">
+						<ul>
+							<li><b>Ciudad Universitaria - <a href="http://www.ciudaduniversitaria.gov.ar">ciudaduniversitaria.gov.ar</a></b>Desarrollo sitio web de beneficios de estudiantes universitarios. Desarrollado en Kohana.</li>
+							<li><b>Webservice para aplicación móvil de Ciudad Universitaria</b>Desarrollo de webservice para acceso a información del sitio web, desarrollado en Ko7.</li>
+							<li><b>Ciudad de Mendoza - <a href="https://ciudaddemendoza.gob.ar">ciudaddemendoza.gob.ar</a></b>Desarrollo y mantenimiento sitio web municipal, desarrollo de plugins para WordPress.</li>
+							<li><b>Administración de sistemas</b>Administración de nginx como reverse proxy, configuración de subdominios, restricción de acceso y mejoras.</li>
+					</div>
+					<b>Desarrollador Freelance</b>
+					<div class="with-title projects">
+						<ul>
+							<li>
+								<b>Hospital Lagomaggiore - Electromedicina</b>
+								Desarrollo de sistema de control de ingresos de equipos a electromedicina, seguimiento de reparaciones, control de asignación a técnicos. Informes detallados.
+							</li>
+							<li>
+								<b>icenter Cocinas -  <a href="http://icentercocinas.es">icentercocinas.es</a></b>
+								Desarrollo de sitio web para el estudio edwards, cliente "Icenter Pamplona". Catálogo de interiorismo online multidispositivo.
+							</li>
+							<li>
+								<b>Odontomás</b>
+								Desarrollo de sitio web para clínica odontológica, actualización de estructura y diseño.
+							</li>
+							<li>
+								<b>Sistema de Stock</b>
+								Desarrollo de sistema de stock para empresa de empaque y envío de hortalizas, control de ingreso, seguimiento, control de IFCOs.
+							</li>
+							<li>
+								<b>Exsa Salud - <a href="http://exsasalud.com.ar/">exsasalud.com.ar</a></b>
+								Desarrollo de sitio web para empresa de medicina prepaga, reestructuración, creación de cartilla de profesionales, armado de programa de beneficios, solicitud de turnos online.
+							</li>
+							<li>
+								<b>Progeser - <a href="https://progeser.com/">progeser.com</a></b>
+								Desarrollo de sitio institucional para empresa de servicios infraestructurales profesionales.
+							</li>
+							<li>
+								<b>El taller de Aixa - <a href="https://eltallerdeaixa.com/">eltallerdeaixa.com</a></b>Desarrollo de sitio de venta de cursos online, configuración de pasarela de pagos y sistema de e-learning.
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div><em>2008 - 2010</em>
+					<b>Desarrollador de sistemas desktop y web para la empresa Tiempo Soluciones Informáticas.</b>
+					<div class="with-title projects">
+						<ul>
+							<li><b>Módulos para el sistema de gestión contable</b>Extracción de información de la aplicación y generación de declaraciones juradas para Arba y AFIP desarrollados en Visual FoxPro.</li>
+							<li><b>Generación y registro de claves de producto</b>Sistema de generación y registro de claves de seguridad desarrollado en C#.</li>
+							<li><b>Sistema hotelero</b>Registro de huespedes y reservas hoteleras desarrollado en C#.</li>
+							<li><b>Página interna para empleados y franquiciados</b>Gestión de sistemas en versión demo de la empresa, noticias, control y administración de usuarios y licencias, desarrollado en PHP.</li>
+							<li><b>Webservice</b>Desarrollado en Visual FoxPro para acceso a tablas dbf de los sistemas de la empresa.</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div><em>2005 - 2008</em>
+					<b>Diseño y desarrollo de sistemas logísticos para la empresa Arce Soluciones.</b>
+					<div class="with-title projects">
+						<ul>
+							<li><b>Sistema logístico para empresas locales</b>Desarrollo y migración de sistemas a Visual Basic .NET</li>
+							<li><b>Interfaces varias</b>Conexión con sistemas Tango y formularios web.</li>
+						</ul>
+					</div>
+			</li>
+		</ul>
+	</section>
+	<footer class="with-title contact">
+		<ul>
+			<li class="name">Andrés Morales</li>
+			<li class="email"><a href="mailto:contacto@andresmorales.com.ar">contacto@andresmorales.com.ar</a></li>
+			<li class="phone"><a href="tel:+54 261 5916857">+54 261 5916857</a></li>
+		</ul>
+	</footer>
+
+    <!-- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    
+	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+ -->
+ <script type="text/javascript">
+ 	var element = document.body;
+	var opt = {
+	  margin:       0,
+	  filename:     'myfile.pdf',
+	  image:        { type: 'jpeg', quality: 0.98 },
+	  html2canvas:  { scale: 2 },
+	  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+	};
+
+	// New Promise-based usage:
+	html2pdf().set(opt).from(element).save();
+ </script>
+</body>
+</html>
