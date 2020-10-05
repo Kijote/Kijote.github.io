@@ -385,17 +385,19 @@
 
  -->
  <script type="text/javascript">
- 	var element = document.body;
-	var opt = {
-	  margin:       0,
-	  filename:     'Andres_Morales_CV.pdf',
-	  image:        { type: 'jpeg', quality: 0.98 },
-	  html2canvas:  { scale: 2 },
-	  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-	};
+	window.onload = function(){
+		var element = document.body;
+		var opt = {
+		  margin:       0,
+		  filename:     'CV_Andres_Morales.pdf',
+		  image:        { type: 'jpeg', quality: 0.98 },
+		  html2canvas:  { scale: 2 },
+		  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+		};
 
-	// New Promise-based usage:
-	html2pdf().set(opt).from(element).save();
+		// New Promise-based usage:
+		html2pdf().set(opt).from(element).save();
+	};
  </script>
 </body>
 </html>
