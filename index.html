@@ -108,33 +108,55 @@
 			padding-left: 32px;
 		}
 
+		body, body.es {
+		  --contact-data: "Datos de contacto";
+		  --projects: "Proyectos destacados";
+		  --tech: "Principales tecnologías";
+		  --frameworks: "Principales frameworks";
+		  --skills: "Principales aptitudes";
+		  --experience: "Experiencia";
+		  --courses: "Estudios / Cursos / Talleres";
+		}
+
+		body.en {
+		  --contact-data: "Contact data";
+		  --projects: "Featured projects";
+		  --tech: "Main technologies";
+		  --frameworks: "Featured frameworks";
+		  --skills: "Main skills";
+		  --experience: "Experience";
+		  --courses: "Education / Courses / Workshops";	
+		}
+
+
+
 		footer.contact:before {
-			content: "Datos de contacto";
+			content: var(--contact-data);
 		}
 
 		.projects:before {
-			content: "Proyectos destacados";
+			content: var(--projects);
 			font-style: italic;
 		}
 
 		.main-tech:before {
-			content: "Principales tecnologías";
+			content: var(--tech);
 		}
 
 		.main-phpf:before {
-			content: "Principales frameworks";
+			content: var(--frameworks);
 		}
 
 		.main-skills:before {
-			content: "Principales aptitudes";
+			content: var(--skills);
 		}
 		
 		.experience:before {
-			content: "Experiencia";
+			content: var(--experience);
 		}
 
 		.courses:before {
-			content: "Estudios / Cursos / Talleres";
+			content: var(--courses);
 		}
 
 		.courses ul {
@@ -232,18 +254,36 @@
 		
 		img {max-height: 220px; margin-top: 0px; margin-left: 0px;}
 
+		div.language {
+			position: absolute;
+			right: 100px;
+			top: 20px;
+		}
+
 
 		section.print {
 			height:60px;
 		}
+
+
+		body.en .lang-es,
+		body.es .lang-en {
+			visibility: hidden !important;
+			display: none !important;
+		}
+
 	</style>
 
 
 
 
 </head>
-<body>
+<body class="en">
 	<header>
+		<div class="language">
+			<a href="?lang-en" id="lang-en">EN</a>
+			<a href="?lang-es" id="lang-es">ES</a>
+		</div>
 		<div class="img">
 			<img src="https://raw.githubusercontent.com/Kijote/Kijote.github.io/master/cv3_min.png">
 		</div>
@@ -261,7 +301,8 @@
 			<li>MySQL</li>
 			<li>HTML5</li>
 			<li>CSS3</li>
-			<li>Javascript</li>
+			<li>JavaScript</li>
+			<li>AJAX</li>
 			<li>git</li>
 			<li>nginx</li>
 		</ul>
@@ -275,7 +316,7 @@
 		</ul>
 	</section>
 	<section class="with-title main-skills centered">
-		<ul class="tagged-list">
+		<ul class="tagged-list lang-es">
 			<li>Responsable</li>
 			<li>Organizado</li>
 			<li>Trabajo en equipo</li>
@@ -286,9 +327,20 @@
 			<li>Adaptable</li>
 			<li>Autodidacta</li>
 		</ul>
+		<ul class="tagged-list lang-en">
+			<li>Responsible</li>
+			<li>Organized</li>
+			<li>Teamwork</li>
+			<li>Proactive</li>
+			<li>Creative</li>
+			<li>Communicative</li>
+			<li>Sociable</li>
+			<li>Adaptable</li>
+			<li>Self-taught</li>
+		</ul>
 	</section>
 	<section class="print"></section>
-	<section class="with-title courses">
+	<section class="with-title courses lang-es">
 		<ul>
 			<li>Taller Amazon Web Services (AWS) - Immersion Days</li>
 			<li>Workshop Introducción a Next.js (React Framework)</li>
@@ -298,23 +350,48 @@
 			<li>Profesorado de Matemática</li>
 		</ul>
 	</section>
+	<section class="with-title courses lang-en">
+		<ul>
+			<li>Amazon Web Services (AWS) - Immersion Days (Workshop)</li>
+			<li>Introduction to Next.js - React Framework (Workshop)</li> 
+			<li>Scrum Master course</li>
+			<li>Time management course</li>
+			<li>Postgraduate in Education and ICTs</li>
+			<li>Math teacher</li>
+		</ul>
+	</section>
 	<section class="with-title experience">
 		<ul>
-			<li><div><em>2010 - Actualidad</em>
-					<b>Desarrollador Web / SysAdmin en Municipalidad de la Ciudad de Mendoza</b>
+			<li>
+				<div class="lang-es">
+					<em>2010 - Actualidad</em>
+					<b>Full Stack Web Developer / SysAdmin en Municipalidad de la Ciudad de Mendoza</b>
 					<div class="with-title projects">
 						<ul>
-							<li><b>Ciudad Universitaria - <a href="http://www.ciudaduniversitaria.gov.ar">ciudaduniversitaria.gov.ar</a></b>Desarrollo sitio web de beneficios de estudiantes universitarios. Desarrollado en Kohana.</li>
-							<li><b>Webservice para aplicación móvil de Ciudad Universitaria</b>Desarrollo de webservice para acceso a información del sitio web, desarrollado en Ko7.</li>
-							<li><b>Ciudad de Mendoza - <a href="https://ciudaddemendoza.gob.ar">ciudaddemendoza.gob.ar</a></b>Desarrollo y mantenimiento sitio web municipal, desarrollo de plugins para WordPress.</li>
-							<li><b>Administración de sistemas</b>Administración de nginx como reverse proxy, configuración de subdominios, restricción de acceso y mejoras.</li>
+							<li>
+								<b>Ciudad Universitaria - <a href="http://www.ciudaduniversitaria.gov.ar">ciudaduniversitaria.gov.ar</a></b>
+								Sitio web y CMS hecho desde cero, cubre el flujo completo del negocio desde la registración de usuarios hasta la generación de una tarjeta física para cada uno de ellos con autorización previa desde la universidad a la que pertenecen. Desarrollado en Kohana.
+							</li>
+							<li>
+								<b>Webservice para aplicación móvil de Ciudad Universitaria</b>
+								Desarrollo de webservice para acceso a información del sitio web, desarrollado en Ko7.
+							</li>
+							<li>
+								<b>Ciudad de Mendoza - <a href="https://ciudaddemendoza.gob.ar">ciudaddemendoza.gob.ar</a></b>
+								Desarrollo y mantenimiento sitio web municipal, desarrollo de plugin para WordPress de migración de contenidos desde la página anterior al sitio nuevo. Desarrollo de mejoras en frontend con CSS y JavaScript.
+							</li>
+							<li>
+								<b>Administración de sistemas</b>
+								Administración de nginx como reverse proxy, configuración de subdominios, restricción de acceso, manejo de certificados SSL y mejoras. Administración de servidores Linux.
+							</li>
+						</ul>
 					</div>
 					<b>Desarrollador Freelance</b>
 					<div class="with-title projects">
 						<ul>
 							<li>
-								<b>Hospital Lagomaggiore - Electromedicina</b>
-								Desarrollo de sistema de control de ingresos de equipos a electromedicina, seguimiento de reparaciones, control de asignación a técnicos. Informes detallados.
+								<b>Hospital Lagomaggiore - Electromedicine</b>
+								Desarrollo de sistema de control de ingresos de equipos a electromedicina, seguimiento de reparaciones, control de asignación a técnicos. Informes detallados. Desarrollado en PHP con controles desarrollados en JavaScript.
 							</li>
 							<li>
 								<b>icenter Cocinas -  <a href="http://icentercocinas.es">icentercocinas.es</a></b>
@@ -342,28 +419,106 @@
 						</ul>
 					</div>
 				</div>
+				<div class="lang-en">
+					<em>2010 - Present</em>
+					<b>Full Stack Web Developer / SysAdmin at Municipalidad de la Ciudad de Mendoza</b>
+					<div class="with-title projects">
+						<ul>
+							<li>
+								<b>Ciudad Universitaria - <a href="http://www.ciudaduniversitaria.gov.ar">ciudaduniversitaria.gov.ar</a></b>
+								Website and CMS made from scratch, it covers the complete business flow from users registration to physical card generation for each of them previously authorized from the university to which they belong. Developed in Kohana.
+							</li>
+							<li>
+								<b>Webservice for Ciudad Universitaria mobile app</b>
+								Webservice development for website information access. Developed in Ko7.
+							</li>
+							<li>
+								<b>Ciudad de Mendoza - <a href="https://ciudaddemendoza.gob.ar">ciudaddemendoza.gob.ar</a></b>
+								Development and maintenance of municipal website, development of WordPress plugin for content migration from the previous page to the new site. Development of frontend improvements with CSS and JavaScript.
+							</li>
+							<li>
+								<b>SysAdmin</b>
+								Administration of nginx as reverse proxy, subdomain configuration, access restriction, SSL certificate management and improvements. Linux server administration.
+							</li>
+						</ul>
+					</div>
+					<b>Freelance Developer</b>
+					<div class="with-title projects">
+						<ul>
+							<li>
+								<b>Hospital Lagomaggiore - Electromedicina</b>
+								Development of an income control system for electromedical equipment, monitoring of repairs, control of assignments to technicians. Detailed reports. Developed in PHP with controls developed in JavaScript.
+							</li>
+							<li>
+								<b>icenter Cocinas -  <a href="http://icentercocinas.es">icentercocinas.es</a></b>
+								Website development for the edwards studio, client "Icenter Pamplona". Multi-device online interior design catalog.
+							</li>
+							<li>
+								<b>Odontomás</b>
+								Website development for dental clinic, structure and design update.
+							</li>
+							<li>
+								<b>Stock system</b>
+								Development of a stock system for a vegetable packaging and shipping company, entry control, monitoring, IFCOs control.
+							</li>
+							<li>
+								<b>Exsa Salud - <a href="http://exsasalud.com.ar/">exsasalud.com.ar</a></b>
+								Website development for a prepaid medicine company, restructuring, creation of a professional directory, setting up a benefits program, requesting online appointments.
+							</li>
+							<li>
+								<b>Progeser - <a href="https://progeser.com/">progeser.com</a></b>
+								Development of institutional site for professional infrastructure services company.
+							</li>
+							<li>
+								<b>El taller de Aixa - <a href="https://eltallerdeaixa.com/">eltallerdeaixa.com</a></b>
+								Development of online course sales site, payment gateway configuration and e-learning system.
+							</li>
+						</ul>
+					</div>
+				</div>
 			</li>
 			<li>
 				<div><em>2008 - 2010</em>
-					<b>Desarrollador de sistemas desktop y web para la empresa Tiempo Soluciones Informáticas.</b>
+					<b>Developer of desktop and web systems for Tiempo Soluciones Informáticas company. </b>
 					<div class="with-title projects">
 						<ul>
-							<li><b>Módulos para el sistema de gestión contable</b>Extracción de información de la aplicación y generación de declaraciones juradas para Arba y AFIP desarrollados en Visual FoxPro.</li>
-							<li><b>Generación y registro de claves de producto</b>Sistema de generación y registro de claves de seguridad desarrollado en C#.</li>
-							<li><b>Sistema hotelero</b>Registro de huespedes y reservas hoteleras desarrollado en C#.</li>
-							<li><b>Página interna para empleados y franquiciados</b>Gestión de sistemas en versión demo de la empresa, noticias, control y administración de usuarios y licencias, desarrollado en PHP.</li>
-							<li><b>Webservice</b>Desarrollado en Visual FoxPro para acceso a tablas dbf de los sistemas de la empresa.</li>
+							<li>
+								<b>Modules for the accounting management system</b>
+								Extraction of information from the application and generation of affidavits for Arba and AFIP developed in Visual FoxPro.
+							</li>
+							<li>
+								<b>Generation and registration of product keys</b>
+								Security key generation and registration system developed in C#.
+							</li>
+							<li>
+								<b>Hotel system</b>
+								Registration of guests and hotel reservations developed in C#.
+							</li>
+							<li>
+								<b>Internal page for employees and franchisees</b>
+								Management of company systems in demo version, news, control and administration of users and licenses, developed in PHP.
+							</li>
+							<li>
+								<b>Webservice</b>
+								Developed in Visual FoxPro to access dbf tables of company systems.
+							</li>
 						</ul>
 					</div>
 				</div>
 			</li>
 			<li>
 				<div><em>2005 - 2008</em>
-					<b>Diseño y desarrollo de sistemas logísticos para la empresa Arce Soluciones.</b>
+					<b>Design and development of logistics systems for Arce Soluciones company.</b>
 					<div class="with-title projects">
 						<ul>
-							<li><b>Sistema logístico para empresas locales</b>Desarrollo y migración de sistemas a Visual Basic .NET</li>
-							<li><b>Interfaces varias</b>Conexión con sistemas Tango y formularios web.</li>
+							<li>
+								<b>Logistics system for local companies</b>
+								Development and migration of systems to Visual Basic .NET
+							</li>
+							<li>
+								<b>Various interfaces</b>
+								Connection with Tango systems and web forms.
+							</li>
 						</ul>
 					</div>
 			</li>
@@ -377,6 +532,27 @@
 		</ul>
 	</footer>
 
+<script type="text/javascript">
+	document.getElementById('lang-en').onclick = function(evt) {
+		console.log('lang-en');
+		let body = document.body;
+		evt.preventDefault();
+  		if ( body.classList.contains('es') ){
+  			body.classList.remove('es');
+  			body.classList.add('en');
+  		}
+	}
+	document.getElementById('lang-es').onclick = function(evt) {
+		console.log('lang-es');
+		let body = document.body;
+		evt.preventDefault();
+  		if ( body.classList.contains('en') ){
+  			body.classList.remove('en');
+  			body.classList.add('es');
+  		}
+	}
+</script>
+
     <!-- 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
@@ -384,7 +560,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
  -->
- <script type="text/javascript">
+ <script type="text/javascript">/*
 	window.onload = function(){
  	var element = document.body;
 	var opt = {
@@ -398,6 +574,6 @@
 	// New Promise-based usage:
 	html2pdf().set(opt).from(element).save();
 	};
- </script>
+ */</script>
 </body>
 </html>
