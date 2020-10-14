@@ -272,15 +272,20 @@
 			display: none !important;
 		}
 
+		@media print
+		{    
+		    .no-print, .no-print *
+		    {
+		        display: none !important;
+		    }
+		}
+
 	</style>
-
-
-
 
 </head>
 <body class="en">
 	<header>
-		<div class="language">
+		<div class="language no-print">
 			<a href="?lang-en" id="lang-en">EN</a>
 			<a href="?lang-es" id="lang-es">ES</a>
 		</div>
