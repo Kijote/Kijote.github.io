@@ -113,9 +113,10 @@
 		  --projects: "Proyectos destacados";
 		  --tech: "Principales tecnologías";
 		  --frameworks: "Principales frameworks";
-		  --skills: "Principales aptitudes";
+		  --mainskills: "Principales aptitudes";
 		  --experience: "Experiencia";
 		  --courses: "Estudios / Cursos / Talleres";
+		  --skills: "Áreas de conocimiento";
 		}
 
 		body.en {
@@ -123,9 +124,10 @@
 		  --projects: "Featured projects";
 		  --tech: "Main technologies";
 		  --frameworks: "Featured frameworks";
-		  --skills: "Main skills";
+		  --mainskills: "Main skills";
 		  --experience: "Experience";
 		  --courses: "Education / Courses / Workshops";	
+		  --skills: "Knoledgement areas";
 		}
 
 
@@ -148,7 +150,7 @@
 		}
 
 		.main-skills:before {
-			content: var(--skills);
+			content: var(--mainskills);
 		}
 		
 		.experience:before {
@@ -159,11 +161,15 @@
 			content: var(--courses);
 		}
 
-		.courses ul {
+		.skills:before {
+			content: var(--skills);
+		}
+
+		.courses ul, .skills ul {
 			margin-top: 32px;
 		}
 
-		.courses {
+		.courses, .skills {
 			padding: 32px 20% 32px 20%;
 			background-color: #f0f0f0;
 		}
@@ -210,7 +216,7 @@
 			border-left: 2px solid #404040;
 		}
 
-		.experience>ul>li:before{
+		.experience>ul>li:before {
 		  color: #404040; 
 		  background-color: #fff;
 		  content: "⬤";
@@ -314,6 +320,7 @@
 			<li class="phone"><a href="tel:+54 261 5916857">+54 261 5916857</a></li>
 		</ul>
 	</header>
+	
 	<section class="presentation">
 		<p class="lang-es">
 			Habilidades de pensamiento crítico, autodidacta y con aptitud para la resolución de problemas.
@@ -322,6 +329,36 @@
 			Critical thinking, self-taught and problem solving skills.
 		</p>
 	</section>
+
+
+	<section class="with-title skills lang-es">
+		<ul>
+			<li>Desarrollador de sistemas Web, usando <b>PHP</b> como backend, sólidos conocimientos de desarrollo frontend usando <b>CSS</b>, <b>JavaScript</b> y <b>HTML</b>.</li>
+			<li>Desarrollo frontend con <b>Bootstrap</b> y <b>jQuery</b>.</li>
+			<li>Manejo de configuración de <b>nginx</b> como <b>proxy reverso</b>.</li>
+			<li>Uso de <b>Docker</b> en producción y <b>git</b> para control de versiones.</li>
+			<li><b>Fácil adaptación</b> a diferentes lenguajes de programación de C# a JavaScript.</li>
+			<li>Administrador y usuario <b>Linux</b> desde 2015.</li>
+		</ul>
+	</section>
+
+	<section class="with-title skills lang-en">
+		<ul>
+			<li>Web systems developer, using <b>PHP</b> as a backend, solid knowledge of frontend development using <b>CSS</b>, <b>JavaScript</b> and <b>HTML</b>.</li>
+			<li>Developing frontend with <b>Bootstrap</b> and <b>jQuery</b>.</li>
+			<li>Managing <b>nginx</b> configuration as a <b>reverse proxy</b>.</li>
+			<li>Use of <b>Docker</b> in production and <b>git</b> for versioning control.</li>
+			<li><b>Easily adaptable</b> to different programming languages from C# to JavaScript.</li>
+			<li><b>Linux</b> user and administrator since 2015.</li>
+		</ul>
+	</section>
+	
+	
+	
+
+
+
+
 	<section class="print"></section>
 	<section class="with-title main-tech centered">
 		<ul class="tagged-list">
