@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+	<meta charset="utf-8"/>
+   	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<style>
+		* {font-size: 3vh; font-family: sans-serif; color: #fff; padding:0px; margin: 0px; transition: all 0.5s ease;}
+		body{background-color:#000}
+		#background {cursor: none;}
+		#content {cursor: auto;}
+		#background, #content{background-color:#000; position: absolute; top:0; left:0; right:0; bottom:0;}
+		#log{color:#fff; display:none;}
+		#log>code{display:block;}
+		#soundmanager-debug{color:#fff;}
+		button{font-size: 3vh; background-color: #2A2A2E; border: 5px solid #5A5A5E;}
+		button::first-line {font-size: 6vh !important;}
+		#playing{font-size: 6vh; color: #5A5A5E; text-align: center; margin-top: 15vh;}
+		#playing::first-line {font-size: 9vh !important; white-space: nowrap; color: #fff;}
+		#status{text-transform: uppercase; text-indent: 1vw; letter-spacing: 1vw; white-space: nowrap; color: #5A5A5E; text-align: center;}
+		#status.loading{text-indent:0; letter-spacing:0; color: #5A5A5E;}
+		#status.playing{text-indent:2vw; letter-spacing:2vw; color: #fff;}
+		#status.error{text-indent:3vw; letter-spacing:3vw; color: red;}
+		div#list{width:40vw; /*float:right;*/ position: fixed; top:0; right:0; bottom:0; overflow: none; height: 100vh; overflow-y: scroll;}
+		div#list>button:first-of-type {border-top: 5px solid #5A5A5E;}
+		div#list>button{min-width: 100%; border-top: 0px;}
+		div#panel{width:60vw; float:left; overflow: none; height: 100vh}
+		
+		
+		 /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch .label {
+  position: absolute;
+  width: max-content;
+  display: inline-block;
+  left: 66px;
+  line-height: 34px;
+  white-space: nowrap;
+}
+		
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2A2A2E;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #5A5A5E;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #5A5A5E;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
+	</style>
+
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
+	<script>
+		// auto actualización ME CAGO EN SAMSUNG!
+
+		d = new Date();
+		var now = d.getFullYear() + '' + d.getMonth() + '' + d.getDate() + '' + d.getHours() + '' + d.getMinutes();
+		var wl = '' + window.location;
+		var wls = window.location.search;
+		if("" == wls.substr(1).trim() || wls.substr(1).trim() != now){
+			window.location = wl.replace(wls, '') + '?' + now; //(new Date()).getMilliseconds() * Math.random() * 1e14;
+		}
+		
+		$(document).keypress(function(event) {
+          		console.log('Handler for .keypress() called. - ' + event.charCode);
+		});
+		
+		$(function(){
+			
+			var log = document.querySelector('#log');
+
+			['log','warn','error'].forEach(function (verb) {
+				console[verb] = (function (method, verb, log) {
+					return function (text) {
+						method(text);
+						// handle distinguishing between methods any way you'd like
+						var msg = document.createElement('code');
+						msg.classList.add(verb);
+						msg.textContent = verb + ': ' + text;
+						log.appendChild(msg);
+					};
+				})(console[verb].bind(console), verb, log);
+			});
+			
+		});
+	</script>
+
+	<script>
+class UI {
+	contentElement = null;
+	fullscreenElement = null;
+	hideTimeout = null;
+	closedFullScreen = false;
+	
+	config = {
+		contentElementName = 		'#content',
+		fullscreenElementName = 	'#fullscreen',
+		autoHideElementName = 		'#autohide',
+		
+		fullscreen = true,
+	};
+	
+	constructor(configuration){
+		let me = this;
+		
+		me.config = configuration || me.config;
+		
+		$(me.config.fullscreenElementName).click(() => {
+			var check = me.children('input')[0];
+			console.log($(check));
+			if($(check).prop("checked")){
+				me.openFullScreen();
+			} else {
+				me.closeFullScreen();
+				me.closedFullScreen = true;
+			}
+
+		});
+		
+		$(me.config.autohideElementName).click(() => {
+			me.contentShow();
+		});
+		
+		me.contentShow();
+		
+		$('body').click(evt => {
+			if(!me.closedFullScreen){
+				me.openFullScreen();
+			}
+			me.contentShow();
+		});
+		
+		$(document).mousemove(evt => {
+			console.log('mooove!');
+			me.contentShow();
+		});
+		
+		me.openFullScreen();
+		
+		$('body').click();
+		
+		if((window.fullScreen) ||
+		   (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+			$($(me.fullscreenElementName).children('input')[0]).prop("checked", true);
+		}
+	}
+	
+	/* View in fullscreen */
+	openFullScreen() {
+		console.log('openFullScreen');
+		var elem = document.documentElement;
+		if (elem.requestFullscreen) {
+		    elem.requestFullscreen();
+		} else if (elem.mozRequestFullScreen) { /* Firefox */
+		    elem.mozRequestFullScreen();
+		} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+		    elem.webkitRequestFullscreen();
+		} else if (elem.msRequestFullscreen) { /* IE/Edge */
+		    elem.msRequestFullscreen();
+		}
+	}
+
+	
+	/* Close fullscreen */
+	closeFullScreen() {
+		console.log('closeFullScreen');
+	  	if (document.exitFullscreen) {
+	    		document.exitFullscreen();
+	  	} else if (document.mozCancelFullScreen) { /* Firefox */
+	    		document.mozCancelFullScreen();
+	  	} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+	    		document.webkitExitFullscreen();
+	  	} else if (document.msExitFullscreen) { /* IE/Edge */
+	    		document.msExitFullscreen();
+	  	}
+	}
+	
+	contentHide(){
+		console.log('hide!');
+		$(this.config.contentElementName).hide();
+	}
+		
+	contentShow(){
+		clearTimeout(this.hideTimeout);
+		console.log('show!');
+		$(this.config.contentElementName).show();
+		var check = $(this.config.autohideElementName).children('input')[0];
+		if($(check).prop("checked")){
+			this.hideTimeout = setTimeout(this.contentHide, 5000);
+		}
+	}
+	
+}
+
+
+// Wrapper functions using UI class
+
+function openFullscreen(){ UI.openFullscreen() }
+
+function closeFullscreen(){ UI.closeFullscreen() }
+
+function show(){ UI.contentShow() }
+
+function hide(){ UI.contentHide() }
+
+
+
+
+var radios = new Array();
+var act_radio = 0;
+
+radios[ 8950] = {radio_name: "Zafiro", 		url: "http://107.170.2.225:8040/zafiro"};
+radios[ 9130] = {radio_name: "Aurora Argentina",	url: "https://radio13.servidorderadio.net/9512/stream"};
+radios[ 9410] = {radio_name: "La Red (Bs. As.)", 	url: "http://190.113.164.52:8080/LaRedCapital"};
+radios[ 9370] = {radio_name: "Montecristo", 		url: "http://190.113.164.52:8080/montecristo"};
+radios[ 9450] = {radio_name: "FM UTN", 		url: "http://streaming.fmutn.com.ar:8000/FMUTN#;.mp3"};
+radios[ 9490] = {radio_name: "Brava", 		url: "http://190.113.164.52:8080/brava"};
+radios[ 9530] = {radio_name: "Metropolitana", 	url: "http://stm3.bahiahosting.com:10318/stream/1/"};
+radios[ 9610] = {radio_name: "Una", 			url: "http://190.113.164.52:8080/una"};
+radios[ 9650] = {radio_name: "Radio Universidad", 	url: "http://fm.uncu.edu.ar:8000/radiouncuyo"};
+radios[ 9810] = {radio_name: "Ayer", 			url: "http://190.113.164.52:8080/ayer"};
+radios[ 9890] = {radio_name: "Nihuil", 		url: "http://190.113.164.52:8080/NihuilAMUSP"};
+radios[10090] = {radio_name: "Estación del sol", 	url: "http://audio.bustream.com:8064/stream"};
+radios[10091] = {radio_name: "Del sol - Fiesta", 	url: "http://audio.bustream.com:8052/stream"};
+radios[10092] = {radio_name: "Del sol - Lentos", 	url: "http://audio.bustream.com:8054/stream"};
+radios[10093] = {radio_name: "Del sol - Play", 	url: "http://audio.bustream.com:8051/stream"};
+radios[10094] = {radio_name: "Del sol - Retro", 	url: "http://audio.bustream.com:8050/stream"};
+radios[10095] = {radio_name: "Del sol - Rock", 	url: "http://audio.bustream.com:8053/stream"};
+radios[10150] = {radio_name: "Red 101",		url: "http://s1.bahiahost.com.ar:7154/stream/1/"};
+radios[10310] = {radio_name: "Radio 2", 		url: "http://audio.bustream.com:8004/stream"};
+radios[10410] = {radio_name: "LV 10", 		url: "http://audio.bustream.com:8062/stream"};
+radios[10450] = {radio_name: "Vorterix Mendoza",	url: "http://104.131.4.100:8000/stream/1/"};
+
+
+var closedFullScreen = false;
+var hideTimeout = null;
+
+var UI = new UI(/* define the config */);
+
+$(document).ready(function() {
+	radios.forEach(function (item, index, array){
+		console.log(array);
+		var itemName = index / 100;
+		if ( array[index].hasOwnProperty('radio_name') ) {
+			itemName = array[index].radio_name + "<br />" + index / 100;
+		}
+		$('<button id="' + index + '" value="' + index / 100 + '" onclick="play(' + index + ');">' + itemName + '</button>').appendTo('div#list');
+		console.log(item);
+	});
+
+	
+});
+
+function __(original_string){
+	return original_string;
+}
+	
+function play(index){
+	act_radio = index;
+	console.log(soundObject);
+	soundObject.destruct();
+
+	var itemName = index / 100;
+	if ( radios[index].hasOwnProperty('radio_name') ) {
+		itemName = radios[index].radio_name + "<br />" + index / 100;
+	}
+	
+	$("#playing").html(itemName);
+	$("#status").removeClass().addClass('loading').text(__('loading'));
+	
+	var radio = radios[index];
+	radio.onload = function(bSuccess) {
+		console.log($('#' + act_radio));
+		if(!bSuccess) { 
+			//$('#' + act_radio).css('background-color', 'red'); 
+			$("#status").removeClass().addClass('error').text(__("error"));
+		} else {
+			$("#status").removeClass().addClass('playing').text(__("playing"));
+		}
+	    	soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
+	}
+
+	// Si no se definió el tipo, es audio/aac
+	if ( !radio.hasOwnProperty('type') ) {
+		radio.type = "audio/aac";
+	}
+	
+	soundObject = soundManager.createSound(radio);
+
+	soundObject.play();
+}
+
+var soundObject;
+
+$(function(){
+	window.soundManager = new SoundManager();
+	window.volume = 100;
+	
+	soundManager.setup({
+		// debugMode: true,
+		// useConsole: true,
+		// consoleOnly: false,
+		
+		url: "https://rawgit.com/scottschiller/SoundManager2/tree/master/swf",
+		preferFlash: false,
+		useHighPerformance: true,
+		useHTML5Audio: true,
+		waitForWindowLoad: false,
+		
+		onready: function(){
+			soundObject = soundManager.createSound({
+				id: "webradio",
+				url: 'http://www.freshly-ground.com/data/audio/binaural/Mak.mp3',
+				autoLoad: true,
+				autoPlay: true,
+				multiShot: false,
+				volume: volume,
+				onload: function(bSuccess) {
+				    soundManager._writeDebug('sound '+(bSuccess?'loaded!': 'did NOT load.'));
+				},
+
+				onfailure: function() {
+					$('#' + act_radio).css('background-color', 'red');
+				},
+			});
+			soundObject.play();
+			setTimeout(function() {
+				if (soundObject.readyState == 1) {
+					console.log('this object is probably stalled');
+					// this object is probably stalled
+					}
+			},5500);
+		},
+
+		ontimeout: function(){
+			console.log('soundObject.readyState: ' + soundObject.readyState);
+		}
+	});
+});
+	</script>
+    </head>
+    <body>
+	    <div id="log"></div>
+	    <div id="background">
+		    <div id="content">
+			    <div id="panel">
+				    <div id="playing"></div>
+				    <div id="status"></div>
+				    <label class="switch" id="fullscreen"><input type="checkbox" checked><span class="slider round"></span><span class="label">Pantalla completa</span></label><br>
+				    <label class="switch" id="autohide"><input type="checkbox" checked><span class="slider round"></span><span class="label">Auto ocultar</span></label><br>
+			    </div>
+			    <div id="list"></div>
+		    </div>
+	    </div>
+	    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2-nodebug-jsmin.js"></script -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
+    </body>
+</html>
+
+
+
+
+
+<!-- 
+var page = require('webpage').create();
+page.open('page.es', function (status) { 
+	if (status !== 'success') { 
+		console.log('Unable to load the address!');
+		phantom.exit();
+	} else { 
+		window.setTimeout(
+			function () { 
+					page.viewportSize = { width: 1000, height: 800 }; 
+					console.log(page.content); 
+					phantom.exit(); 
+			}, 400); 
+	} 
+});
+
+-->
+
+<!-- Mozilla/5.0 (SMART-TV; Linux; Tizen 2.4.0) AppleWebKit/538.1 (KHTML, like Gecko) SamsungBrowser/1.1 TV Safari/538.1 -->
