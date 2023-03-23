@@ -243,20 +243,6 @@ class UI {
 	
 }
 
-
-// Wrapper functions using UI class
-
-function openFullscreen(){ UI.openFullscreen() }
-
-function closeFullscreen(){ UI.closeFullscreen() }
-
-function show(){ UI.contentShow() }
-
-function hide(){ UI.contentHide() }
-
-
-
-
 var radios = new Array();
 var act_radio = 0;
 
@@ -286,8 +272,19 @@ radios[10450] = {radio_name: "Vorterix Mendoza",	url: "http://104.131.4.100:8000
 var closedFullScreen = false;
 var hideTimeout = null;
 
-var UI = new UI(/* define the config */);
+var newUI = new UI(/* define the config */);
 
+// Wrapper functions using UI class
+
+function openFullscreen(){ newUI.openFullscreen() }
+
+function closeFullscreen(){ newUI.closeFullscreen() }
+
+function show(){ newUI.contentShow() }
+
+function hide(){ newUI.contentHide() }
+		
+		
 $(document).ready(function() {
 	radios.forEach(function (item, index, array){
 		console.log(array);
@@ -407,27 +404,5 @@ $(function(){
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/soundmanager2/2.97a.20150601/script/soundmanager2.js"></script>
     </body>
 </html>
-
-
-
-
-
-<!-- 
-var page = require('webpage').create();
-page.open('page.es', function (status) { 
-	if (status !== 'success') { 
-		console.log('Unable to load the address!');
-		phantom.exit();
-	} else { 
-		window.setTimeout(
-			function () { 
-					page.viewportSize = { width: 1000, height: 800 }; 
-					console.log(page.content); 
-					phantom.exit(); 
-			}, 400); 
-	} 
-});
-
--->
 
 <!-- Mozilla/5.0 (SMART-TV; Linux; Tizen 2.4.0) AppleWebKit/538.1 (KHTML, like Gecko) SamsungBrowser/1.1 TV Safari/538.1 -->
