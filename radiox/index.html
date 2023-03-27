@@ -139,108 +139,115 @@ input:checked + .slider:before {
 
 	<script>
 class UI {
-	contentElement = null;
-	fullscreenElement = null;
-	hideTimeout = null;
-	closedFullScreen = false;
-	
-	config = {
-		"contentElementName": "#content",
-		"fullscreenElementName": "#fullscreen",
-		"autoHideElementName": "#autohide",
-		"fullscreen": true,
-	};
-	
-	constructor(configuration){
-		let me = this;
-		
-		me.config = configuration || me.config;
-		
-		$(me.config.fullscreenElementName).click(() => {
-			var check = me.children('input')[0];
-			console.log($(check));
-			if($(check).prop("checked")){
-				me.openFullScreen();
-			} else {
-				me.closeFullScreen();
-				me.closedFullScreen = true;
-			}
+  contentElement = null;
+  fullscreenElement = null;
+  hideTimeout = null;
+  closedFullScreen = false;
 
-		});
-		
-		$(me.config.autohideElementName).click(() => {
-			me.contentShow();
-		});
-		
-		me.contentShow();
-		
-		$('body').click(evt => {
-			if(!me.closedFullScreen){
-				me.openFullScreen();
-			}
-			me.contentShow();
-		});
-		
-		$(document).mousemove(evt => {
-			console.log('mooove!');
-			me.contentShow();
-		});
-		
-		me.openFullScreen();
-		
-		$('body').click();
-		
-		if((window.fullScreen) ||
-		   (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
-			$($(me.fullscreenElementName).children('input')[0]).prop("checked", true);
-		}
-	}
-	
-	/* View in fullscreen */
-	openFullScreen() {
-		console.log('openFullScreen');
-		var elem = document.documentElement;
-		if (elem.requestFullscreen) {
-		    elem.requestFullscreen();
-		} else if (elem.mozRequestFullScreen) { /* Firefox */
-		    elem.mozRequestFullScreen();
-		} else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-		    elem.webkitRequestFullscreen();
-		} else if (elem.msRequestFullscreen) { /* IE/Edge */
-		    elem.msRequestFullscreen();
-		}
-	}
+  config = {
+    contentElementName: "#content",
+    fullscreenElementName: "#fullscreen",
+    autoHideElementName: "#autohide",
+    fullscreen: true,
+  };
 
-	
-	/* Close fullscreen */
-	closeFullScreen() {
-		console.log('closeFullScreen');
-	  	if (document.exitFullscreen) {
-	    		document.exitFullscreen();
-	  	} else if (document.mozCancelFullScreen) { /* Firefox */
-	    		document.mozCancelFullScreen();
-	  	} else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-	    		document.webkitExitFullscreen();
-	  	} else if (document.msExitFullscreen) { /* IE/Edge */
-	    		document.msExitFullscreen();
-	  	}
-	}
-	
-	contentHide(){
-		console.log('hide!');
-		$(this.config.contentElementName).hide();
-	}
-		
-	contentShow(){
-		clearTimeout(this.hideTimeout);
-		console.log('show!');
-		$(this.config.contentElementName).show();
-		var check = $(this.config.autohideElementName).children('input')[0];
-		if($(check).prop("checked")){
-			this.hideTimeout = setTimeout(this.contentHide, 5000);
-		}
-	}
-	
+  constructor(configuration) {
+    let me = this;
+
+    me.config = configuration || me.config;
+
+    $(me.config.fullscreenElementName).click(() => {
+      var check = $(me.config.fullscreenElementName).find("input")[0];
+      console.log($(check));
+      if ($(check).prop("checked")) {
+        me.openFullScreen();
+      } else {
+        me.closeFullScreen();
+        me.closedFullScreen = true;
+      }
+    });
+
+    $(me.config.autoHideElementName).click(() => {
+      me.contentShow();
+    });
+
+    me.contentShow();
+
+    $("body").click((evt) => {
+      if (!me.closedFullScreen) {
+        me.openFullScreen();
+      }
+      me.contentShow();
+    });
+
+    $(document).mousemove((evt) => {
+      console.log("mooove!");
+      me.contentShow();
+    });
+
+    me.openFullScreen();
+
+    $("body").click();
+
+    if (
+      window.fullScreen ||
+      (window.innerWidth == screen.width && window.innerHeight == screen.height)
+    ) {
+      $(me.config.fullscreenElementName)
+        .find("input")
+        .prop("checked", true);
+    }
+  }
+
+  /* View in fullscreen */
+  openFullScreen() {
+    console.log("openFullScreen");
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  /* Close fullscreen */
+  closeFullScreen() {
+    console.log("closeFullScreen");
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      /* Firefox */
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      /* Chrome, Safari and Opera */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      /* IE/Edge */
+      document.msExitFullscreen();
+    }
+  }
+
+  contentHide() {
+    console.log("hide!");
+    $(this.config.contentElementName).hide();
+  }
+
+  contentShow() {
+    clearTimeout(this.hideTimeout);
+    console.log("show!");
+    $(this.config.contentElementName).show();
+    var check = $(this.config.autoHideElementName).find("input")[0];
+    if($(check).prop("checked")){
+	this.hideTimeout = setTimeout(this.contentHide, 5000);
+    }
+  }	
 }
 
 var radios = new Array();
