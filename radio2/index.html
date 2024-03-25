@@ -10,9 +10,16 @@
         }
            
         function HomePage() {
+            const names = ['94.9', '95.3', '100.9'];
+
             return (
               <div>
-                <Header title="React Working!" />
+                <Header title="React Radio working!" />
+                <ul>
+                    {names.map((name) => (
+                      <li key={name}>{name}</li>
+                    ))}
+                </ul>
               </div>
             );
         }
